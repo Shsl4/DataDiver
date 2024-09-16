@@ -1,0 +1,133 @@
+@use 'common' as *;
+
+@mixin common-theme {
+
+  --accent: #{var(--system-blue-300)};
+  --accent-secondary: #{var(--system-blue-200)};
+
+  --system-blue-400: #086cd9;
+  --system-blue-300: #1d88fe;
+  --system-blue-200: #8fc3ff;
+  --system-blue-100: #eaf4ff;
+
+  --system-green-400: #11845b;
+  --system-green-300: #05c168;
+  --system-green-200: #7fdca4;
+  --system-green-100: #def2e6;
+
+  --system-red-400: #dc2b2b;
+  --system-red-300: #ff5a65;
+  --system-red-200: #ffbec2;
+  --system-red-100: #ffeff0;
+
+  --system-orange-400: #d5691b;
+  --system-orange-300: #ff9e2c;
+  --system-orange-200: #ffd19b;
+  --system-orange-100: #fff3e4;
+
+  --system-yellow-400: #d4b300;
+  --system-yellow-300: #ffcc00;
+  --system-yellow-200: #ffdf80;
+  --system-yellow-100: #fff7e6;
+
+  --font-name: 'Inter';
+
+}
+
+@mixin light-theme {
+
+  @include common-theme;
+
+  color-scheme: light;
+
+  --box-border: #e2e2e2;
+
+  --primary-text: #081028;
+  --secondary-text: #969696;
+  --tertiary-text: #0a1330;
+
+  --primary-background: #ffffff;
+  --secondary-background: #f2f2f2;
+  --tertiary-background: #eeeeee;
+
+}
+
+@mixin dark-theme {
+
+  @include common-theme;
+
+  color-scheme: dark;
+
+  --box-border: #182032;
+
+  --primary-text: #eaeaea;
+  --secondary-text: #b0b5ca;
+  --tertiary-text: #979ba8;
+
+  --primary-background: #0d121b;
+  --secondary-background: #111723;
+  --tertiary-background: #151c2b;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include dark-theme;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @include light-theme;
+  }
+}
+
+.dark {
+  @include dark-theme;
+}
+
+.light {
+  @include light-theme;
+}
+
+#root {
+  @include inline-flex-row;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: $primary-background;
+}
+
+// Open session
+.delete-entry-button {
+  pointer-events: all;
+  background-color: $primary-background;
+  transition: color ease 0.125s;
+  &:hover {
+    cursor: pointer;
+    color: $system-red-300;
+  }
+}
+
+// Open session
+.border-highlight {
+
+  transition: border-color 0.2s ease, color 0.2s ease;
+  
+  &:hover {
+    border-color: $accent-secondary;
+    color: $accent-secondary;
+  }
+  
+}
+
+// Chat page
+.download-button {
+  background-color: $primary-background;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  &:hover {
+    background-color: $secondary-background;
+  }
+}

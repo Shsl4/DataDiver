@@ -1,0 +1,23 @@
+﻿@use "../common" as *;
+@use 'sass:color';
+
+.notification {
+  
+  pointer-events: all;
+  background-color: $primary-background;
+  cursor: pointer;
+  box-shadow: 5px 5px 25px rgb(0 0 0 / 15%);
+  max-width: 100%;
+  opacity: 0;
+  transition: box-shadow 0.25s ease, scale 0.25s ease;
+  
+  &:hover {
+    scale: 0.98;
+    box-shadow: 5px 5px 15px rgb(0 0 0 / 15%);
+  }
+  
+  &:active {
+    scale: 0.95;
+  }
+  
+}

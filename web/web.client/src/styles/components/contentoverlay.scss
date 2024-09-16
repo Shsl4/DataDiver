@@ -1,0 +1,16 @@
+﻿@use "../common" as *;
+
+.content-overlay {
+
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  filter: blur(0);
+  background-color: #00000005;
+
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,15 @@
+@mixin inline-flex {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@mixin inline-flex-column {
+  @include inline-flex;
+  flex-direction: column;
+}
+
+@mixin inline-flex-row {
+  @include inline-flex;
+  flex-direction: row;
+}

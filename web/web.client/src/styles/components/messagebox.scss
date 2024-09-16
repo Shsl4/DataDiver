@@ -1,0 +1,231 @@
+﻿@use "../common" as *;
+
+$mistral-gradient: linear-gradient(135deg, #f7d046 0%, #f2a73b 25%, #ee792f 50%, #eb5829 75%, #ea3326 100%);
+$meta-gradient: linear-gradient(135deg, #2dc7ff 0%, #0064e0 100%);
+$microsoft-gradient: linear-gradient(135deg, #f1511b 0%, #80cc28 33%, #00adef 66%, #fbbc09 100%);
+
+code {
+  @include main-font-style;
+  font-size: small;
+}
+
+.mistral-gradient::before {
+  background: $mistral-gradient;
+}
+
+.meta-gradient::before {
+  background: $meta-gradient;
+}
+
+.microsoft-gradient::before {
+  background: $microsoft-gradient;
+}
+
+.loading-box {
+  
+  background-color: $primary-background;
+  
+  &-gradient {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    min-height: 0;
+    min-width: 300px;
+    width: 100%;
+    box-shadow: 6px 6px 12px rgb(0 0 0 / 10%);
+  }
+  
+  &-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: 200% 200%;
+    animation: ease 4s gradient infinite;
+  }
+
+  &-icon {
+    min-width: 32px;
+    aspect-ratio: 1;
+  }
+  
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.message-box {
+
+  width: 100%;
+  border: solid 1px $box-border;
+  box-shadow: 6px 6px 12px rgb(0 0 0 / 10%);
+
+  &-content {
+    overflow: hidden;
+  }
+  
+  &-content p:first-of-type{
+    margin-top: 0;
+  }
+  
+  &-content p:last-of-type{
+    margin-bottom: 0;
+  }
+  
+  &-date {
+    color: $secondary-text
+  }
+
+  &-icon {
+    width: 32px;
+    aspect-ratio: 1;
+  }
+
+  &-action-icon {
+    color: $secondary-text;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    aspect-ratio: 1;
+    width: 24px;
+    transition: color ease 0.25s;
+    
+    &:hover:enabled {
+      cursor: pointer;
+      color: $primary-text;
+    }
+  }
+  
+}
+
+.chat-page {
+  min-width:60%;
+  width: 75%;
+}
+
+.ai-chatbox {
+
+  background-color: transparent;
+  outline: 0;
+  resize: none;
+  overflow-y: scroll;
+  text-wrap: wrap;
+  text-align: left;
+  border: none;
+  max-height: 10em;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+}
+
+.scenario-box {
+
+  background-color: transparent;
+  outline: 0;
+  resize: none;
+  overflow-y: scroll;
+
+
+}
+
+.bottom-fade {
+  mask-image: linear-gradient(to bottom, transparent, black 3%, black 97%, transparent);
+}
+
+.ai-select-button {
+  background-color: $primary-background;
+  outline: 0;
+  transition: color 0.25s ease, background-color 0.25s ease;
+  &:disabled {
+    cursor: default;
+    color: $secondary-text;
+  }
+  &:hover:enabled {
+    background-color: $secondary-background;
+    cursor: pointer;
+  }
+}
+
+.ai-choice-button {
+  outline: 0;
+  border: 0;
+  background-color: $primary-background;
+  transition: background-color 0.25s ease;
+  &:enabled {
+    cursor: pointer;
+  }
+  &:hover {
+    background-color: $tertiary-background;
+  }
+}
+
+.chat-settings-button {
+  
+  outline: 0;
+  border: 0;
+  min-width: 24px;
+  aspect-ratio: 1;
+  color: $secondary-text;
+  background-color: transparent;
+  border-radius: 50%;
+  pointer-events: all;
+  transition: rotate ease-out 0.25s, color ease 0.25s;
+  
+  &:hover{
+    color: $primary-text;
+    cursor: pointer;
+  }
+  
+}
+
+.hover-rotate:hover {
+  rotate: 115deg;
+}
+
+.my-input {
+
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  margin: 0;
+  border: solid $box-border 1px;
+  outline: 0;
+  transition: color 0.25s ease;
+  background-color: $primary-background;
+  
+  &:disabled{
+    color: $secondary-text
+  }
+  
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.positive {
+  color: $system-green-300;
+}
+
+.dangerous {
+  color: $system-red-300;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,15 @@
+@use "../common" as *;
+
+.step-circle {
+
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 32px;
+  border: solid 2px $secondary-text;
+  color: $secondary-text;
+
+}
+
+.check-icon {
+  clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+}

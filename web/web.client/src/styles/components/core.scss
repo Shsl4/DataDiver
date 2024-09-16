@@ -1,0 +1,352 @@
+@use "../common" as *;
+
+$sizes: none 0, x-small 2px, small 4px, medium 8px, large 16px, x-large 24px, xx-large 32px;
+$directions: t top, b bottom, r right, l left, v 0 0, h 0 0;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.stack-h {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.stack-v {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stack-z {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.stack-z > * {
+  grid-area: 1/1/1/1;
+}
+
+.expand {
+  width: 100%;
+  height: 100%;
+}
+
+.expand-v {
+  height: 100%;
+}
+
+.expand-h {
+  width: 100%;
+}
+
+.expand-50 {
+  width: 50%;
+  height: 50%;
+}
+
+.expand-v-50 {
+  height: 50%;
+}
+
+.expand-h-50 {
+  width: 50%;
+}
+
+.align-s {
+  align-items: flex-start;
+}
+
+.align-e {
+  align-items: flex-end;
+}
+
+.align-c {
+  align-items: center;
+}
+
+.justify-s {
+  justify-content: flex-start;
+}
+
+.justify-e {
+  justify-content: flex-end;
+}
+
+.justify-c {
+  justify-content: center;
+}
+
+.justify-sb {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.display {
+  gap: 8px;
+  border-radius: 8px;
+  border: solid $box-border 1px;
+  background-color: $primary-background;
+}
+
+.auto-scroll {
+  overflow: auto;
+}
+
+.auto-clip {
+  overflow: clip;
+}
+
+.separator-h {
+  min-width: 100%;
+  min-height: 1px;
+  background-color: $box-border;
+}
+
+.separator-v {
+  min-height: 100%;
+  min-width: 1px;
+  background-color: $box-border;
+}
+
+.basic-text {
+  @include main-font-style;
+  font-size: medium;
+}
+
+.text {
+  @include main-font-style;
+  font-size: medium;
+  color: $primary-text;
+}
+
+.text-small {
+  @include main-font-style;
+  font-size: small;
+  color: $primary-text;
+}
+
+.text-large {
+  @include main-font-style;
+  font-size: large;
+  color: $primary-text;
+}
+
+.text-x-large {
+  @include main-font-style;
+  font-size: x-large;
+  color: $primary-text;
+}
+
+.text-xx-large {
+  @include main-font-style;
+  font-size: xx-large;
+  color: $primary-text;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.title {
+  @include main-font-style;
+  font-weight: bold;
+  font-size: x-large;
+  color: $primary-text;
+}
+
+.subtitle {
+  @include main-font-style;
+  font-size: medium;
+  color: $secondary-text;
+}
+
+.subtitle-small {
+  @include main-font-style;
+  font-size: small;
+  color: $secondary-text;
+}
+
+.background-primary {
+  background-color: $primary-background;
+}
+
+.background-secondary {
+  background-color: $secondary-background;
+}
+
+.background-tertiary {
+  background-color: $tertiary-background;
+}
+
+.border-none {
+  border: none;
+}
+
+.box-border {
+  border: solid $box-border 1px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@each $size, $value in $sizes {
+  .border-radius-#{$size} {
+    border-radius: $value;
+  }
+}
+
+@each $size, $value in $sizes {
+  .gap-#{$size} {
+    gap: $value;
+  }
+}
+
+@mixin generate-padding-classes($suffix, $value, $direction: null) {
+  @if $direction == null {
+    .padding-#{$suffix} {
+      padding: $value;
+    }
+  } @else {
+    .padding-#{$direction}-#{$suffix} {
+      padding-#{$direction}: $value;
+    }
+  }
+}
+
+@mixin generate-margin-classes($suffix, $value, $direction: null) {
+  @if $direction == null {
+    .margin-#{$suffix} {
+      margin: $value;
+    }
+  } @else {
+    .margin-#{$direction}-#{$suffix} {
+      margin-#{$direction}: $value;
+    }
+  }
+}
+
+@each $size, $value in $sizes {
+  @include generate-padding-classes($size, $value);
+
+  @each $abbr, $direction in $directions {
+    @if $abbr == v {
+      .padding-v-#{$size} {
+        padding-top: $value;
+        padding-bottom: $value;
+      }
+    } @else if $abbr == h {
+      .padding-h-#{$size} {
+        padding-left: $value;
+        padding-right: $value;
+      }
+    } @else {
+      @include generate-padding-classes($size, $value, $direction);
+    }
+  }
+}
+
+@each $size, $value in $sizes {
+  @include generate-margin-classes($size, $value);
+
+  @each $abbr, $direction in $directions {
+    @if $abbr == v {
+      .margin-v-#{$size} {
+        margin-top: $value;
+        margin-bottom: $value;
+      }
+    } @else if $abbr == h {
+      .margin-h-#{$size} {
+        margin-left: $value;
+        margin-right: $value;
+      }
+    } @else {
+      @include generate-margin-classes($size, $value, $direction);
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.ignore-cursor {
+  pointer-events: none;
+}
+
+.auto-fade-in {
+  opacity: 0;
+  animation: ease 500ms auto-fade-in forwards;
+}
+
+@keyframes auto-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.popover {
+  min-width: 40%;
+  background-color: $primary-background;
+  border: solid 1px $secondary-background;
+  box-shadow: 0 6px 15px -5px rgba(0, 0, 0, 0.15)
+}
+
+.large-menu-button {
+  background-color: $primary-background;
+  outline: 0;
+  min-width: 200px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  &-selected {
+    border-color: $accent;
+    color: $accent !important;
+  }
+}
+
+.basic-button {
+
+  background-color: $primary-background;
+  font-size: small;
+  outline: 0;
+  border: solid 1px $tertiary-background;
+  min-width: 100px;
+  min-height: 35px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  
+  &:disabled {
+    cursor: default;
+    color: $secondary-text;
+    background-color: $tertiary-background;
+  }  
+  
+  &:hover:enabled {
+    cursor: pointer;
+    background-color: $secondary-background;
+  }
+  
+}
